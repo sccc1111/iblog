@@ -10,6 +10,12 @@ module.exports = {
     output: {
         path: path.join(__dirname, './dist')
     },
+    resolve: {
+      extensions: ['.js', '.vue', '.json'],
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      } 
+    },
     module: {
         rules: [{
                 test: /\.vue$/,

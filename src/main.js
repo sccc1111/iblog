@@ -7,6 +7,7 @@ import Util from './libs/util';
 import App from './app.vue';
 import axios from 'axios'
 import { post, get } from './utils/http';
+import store from './store'
 import 'iview/dist/styles/iview.css';
 
 Vue.use(VueRouter);
@@ -34,23 +35,6 @@ router.afterEach(() => {
     iView.LoadingBar.finish();
     window.scrollTo(0, 0);
 });
-
-
-const store = new Vuex.Store({
-    state: {
-
-    },
-    getters: {
-
-    },
-    mutations: {
-
-    },
-    actions: {
-
-    }
-});
-
 
 new Vue({
     el: '#app',

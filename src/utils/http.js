@@ -1,11 +1,14 @@
 import axios from 'axios';
+import Qs from 'qs'
+//axios.defaults.timeout = 5000;
 
-axios.defaults.timeout = 5000;
-
-axios.interceptors.request.use(config => {
-    config.data = JSON.stringify(config.data);
-    return config;
-});
+var axios_instance = axios.create({
+  transformRequest: [function (data) {
+    data = Qs.stringify(data);
+    return data;
+  }],
+  headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+})
 
 /**
  * 封装get方法
@@ -13,11 +16,9 @@ axios.interceptors.request.use(config => {
  * @param data
  * @returns {Promise}
  */
-export function get(url,params={}){
+export function get(url,data={}){
     return new Promise((resolve,reject)=>{
-        axios.get(url,{
-            params:params
-         }).then(response => {
+        axios_instance.get(url,data).then(response => {
             resolve(response.data);
          }).catch(err => {
             reject(err)
@@ -31,9 +32,9 @@ export function get(url,params={}){
  * @param data
  * @returns {Promise}
  */
-export function post(url,data = {}){
+export function post(url,data={}){
     return new Promise((resolve,reject)=>{
-        axios.post(url,data)
+        axios_instance.post(url,data)
          .then(response => {
            resolve(response.data);
          },err => {

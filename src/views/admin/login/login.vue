@@ -20,6 +20,7 @@
     </div>
 </template>
 <script>
+import Cookies from 'js-cookie' 
 export default {
       data () {
           return {
@@ -50,12 +51,13 @@ export default {
           handleSubmit: function(){
               this.$refs.loginForm.validate((valid) => {
                   if(valid){
-                    this.$get('/api/login',{user:this.loginForm.user,password:this.loginForm.password})
+                    this.$post('/api/login',{user:this.loginForm.user,password:this.loginForm.password})
                      .then((data) =>{
                          if(data.code != '200'){
                            this.$Message.error(data.msg);
                          } else {
-                            
+                            Cookies.set('TokenKey',data.obj);
+                            this.$router.push('/home')
                          }
                      })  
                   }

@@ -2,14 +2,6 @@ import Env from './env';
 import path from './path';
 
 let config = {
-    build: { 
-        env: Env 
-    },
-    // dev 环境
-    dev: { 
-        env: Env, 
-        port: 8088, 
-        proxyTable: {}, 
-    }
+    env: Env 
 };
 export default config;
